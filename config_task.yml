@@ -1,0 +1,32 @@
+sites:
+  Qingwa:
+    enabled: true
+    cookie: ""
+    tasks: [
+      "daily_shotbox"
+    ]
+  Car:
+    enabled: true
+    cookie: ""
+    tasks: [
+      "daily_claim_task"
+    ]
+  Cyanbug:
+    enabled: true
+    cookie: ""
+    tasks: [
+      "daily_shotbox"
+    ]
+  Vicomo:
+    enabled: true
+    cookie: ""
+    tasks: [
+      "daily_shotbox",
+      "daily_checkin"
+    ]
+  Zm:
+    enabled: true
+    cookie: ""
+    tasks: [
+      "daily_shotbox"
+    ]
