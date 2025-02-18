@@ -30,3 +30,9 @@ sites:
     tasks: [
       "daily_shotbox"
     ]
+  Lgs:
+    enabled: true
+    cookie: ""
+    tasks: [
+      "daily_shotbox"
+    ]
