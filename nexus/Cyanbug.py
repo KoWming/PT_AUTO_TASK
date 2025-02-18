@@ -1,0 +1,22 @@
+from .NexusPHP import NexusPHP
+from lxml import etree
+
+
+class Cyanbug(NexusPHP):
+
+    def __init__(self, cookie):
+        super().__init__("https://cyanbug.net", cookie)
+
+    def send_messagebox(self, message: str, callback=None) -> str:
+        return super().send_messagebox(message,
+                                       lambda response: " ".join(
+                                           etree.HTML(response.text).xpath("//tr[1]/td/span/text()")))
+
+
+class Tasks:
+    def __init__(self, cookie: str):
+        self.cyanbug = Cyanbug(cookie)
+
+    def daily_shotbox(self):
+        shbox_text_list = ["青虫娘，求上传", "青虫娘，求魔力", "青虫娘，求下载"]
+        return "\n".join([self.cyanbug.send_messagebox(item) for item in shbox_text_list])
