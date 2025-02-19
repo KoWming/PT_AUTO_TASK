@@ -10,7 +10,6 @@ class Vicomo(NexusPHP):
     def send_messagebox(self, message: str, callback=None) -> str:
         return super().send_messagebox(message,
                                        lambda response: "")
-        # TODO: 象站返回数据在邮箱种，需要进一步处理
 
 
 class Tasks:

@@ -35,6 +35,17 @@ class NexusPHP:
         return rt_method(response)
 
     """
+    获取群聊区消息
+    """
+
+    def get_messagebox(self, rt_method: callable = None) -> list:
+        if rt_method is None:
+            rt_method = lambda response: ["".join(item.xpath(".//text()")) for item in
+                                          etree.HTML(response.text).xpath("//tr/td")]
+        response = CustomRequests.get(self.url_shoutbox, headers=self.headers)
+        return rt_method(response)
+
+    """
     申领任务
     """
 
