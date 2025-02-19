@@ -3,11 +3,13 @@ from lxml import etree
 
 
 class NexusPHP:
-    def __init__(self, url, cookie: str, url_shoutbox: str = None, url_ajax: str = None, attendance_url: str = None):
+    def __init__(self, url, cookie: str, url_shoutbox: str = None, url_ajax: str = None, attendance_url: str = None,
+                 messages_url: str = None):
         self.url = url
         self.url_shoutbox = url_shoutbox or self.url + "/shoutbox.php"
         self.url_ajax = url_ajax or self.url + "/ajax.php"
         self.attendance_url = attendance_url or self.url + "/attendance.php"
+        self.messages_url = messages_url or self.url + "/messages.php"
         self.cookie = cookie
         self.headers = {
             "cookie": self.cookie,
@@ -51,4 +53,32 @@ class NexusPHP:
 
     def attendance(self, rt_method: callable):
         response = CustomRequests.get(self.attendance_url, headers=self.headers)
+        return rt_method(response)
+
+    """
+    获取邮件列表
+    """
+
+    def get_message_list(self, rt_method: callable = None):
+        if rt_method is None:
+            rt_method = lambda response: [
+                {"status": "".join(item.xpath("./td[1]/img/@title")), "topic": "".join(item.xpath("./td[2]//text()")),
+                 "from": "".join(item.xpath("./td[3]/text()")), "time": "".join(item.xpath("./td[4]//text()")),
+                 "id": "".join(item.xpath("./td[5]/input/@value"))} for item in
+                etree.HTML(response.text).xpath("//form/table//tr")]
+        response = CustomRequests.get(self.messages_url, headers=self.headers)
+        return rt_method(response)
+
+    """
+    将邮件设为已读
+    """
+
+    def set_message_read(self, message_id: str, rt_method: callable = lambda response: ""):
+        data = {
+            "action": "moveordel",
+            "messages[]": message_id,
+            "markread": "设为已读",
+            "box": "1"
+        }
+        response = CustomRequests.post(self.messages_url, headers=self.headers, data=data)
         return rt_method(response)
