@@ -18,3 +18,6 @@ class Tasks:
     def daily_shotbox(self):
         shbox_text_list = ["黑丝娘 求上传", "黑丝娘 求工分"]
         return "\n".join([self.lgs.send_messagebox(item) for item in shbox_text_list])
+
+    def daily_checkin(self):
+        return self.lgs.attendance()

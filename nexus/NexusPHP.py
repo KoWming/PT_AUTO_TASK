@@ -62,7 +62,9 @@ class NexusPHP:
     每日签到
     """
 
-    def attendance(self, rt_method: callable):
+    def attendance(self, rt_method: callable = None):
+        if rt_method is None:
+            rt_method = lambda response: "".join(etree.HTML(response.text).xpath("//td/table//tr/td/p//text()"))
         response = CustomRequests.get(self.attendance_url, headers=self.headers)
         return rt_method(response)
 

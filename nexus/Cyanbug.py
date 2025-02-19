@@ -18,3 +18,6 @@ class Tasks:
     def daily_shotbox(self):
         shbox_text_list = ["青虫娘，求上传", "青虫娘，求魔力", "青虫娘，求下载"]
         return "\n".join([self.cyanbug.send_messagebox(item) for item in shbox_text_list])
+
+    def daily_checkin(self):
+        return self.cyanbug.attendance()

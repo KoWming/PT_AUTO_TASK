@@ -21,3 +21,6 @@ class Tasks:
     def daily_claim_task(self):
         task_id_list = ["5"]
         return "\n".join([self.car.claim_task(item) for item in task_id_list])
+
+    def daily_checkin(self):
+        return self.car.attendance()

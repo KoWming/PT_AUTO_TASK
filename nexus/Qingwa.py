@@ -20,3 +20,6 @@ class Tasks:
     def daily_shotbox(self):
         shbox_text_list = ["蛙总，求上传", "蛙总，求下载"]
         return "\n".join([self.qingwa.send_messagebox(item) for item in shbox_text_list])
+
+    def daily_checkin(self):
+        return self.qingwa.attendance()

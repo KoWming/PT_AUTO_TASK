@@ -28,3 +28,6 @@ class Tasks:
                 message = message_list[0]
                 rsp_text_list.append(message)
         return "\n".join(rsp_text_list)
+
+    def daily_checkin(self):
+        return self.zm.attendance()

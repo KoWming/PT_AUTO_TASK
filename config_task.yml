@@ -3,19 +3,22 @@ sites:
     enabled: true
     cookie: ""
     tasks: [
-      "daily_shotbox"
+      "daily_shotbox",
+      "daily_checkin"
     ]
   Car:
     enabled: true
     cookie: ""
     tasks: [
-      "daily_claim_task"
+      "daily_shotbox",
+      "daily_checkin"
     ]
   Cyanbug:
     enabled: true
     cookie: ""
     tasks: [
-      "daily_shotbox"
+      "daily_shotbox",
+      "daily_checkin"
     ]
   Vicomo:
     enabled: true
@@ -28,11 +31,13 @@ sites:
     enabled: true
     cookie: ""
     tasks: [
-      "daily_shotbox"
+      "daily_shotbox",
+      "daily_checkin"
     ]
   Lgs:
     enabled: true
     cookie: ""
     tasks: [
-      "daily_shotbox"
+      "daily_shotbox",
+      "daily_checkin"
     ]

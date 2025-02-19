@@ -29,5 +29,4 @@ class Tasks:
         return "\n".join(rsp_text_list)
 
     def daily_checkin(self):
-        return self.vicomo.attendance(
-            lambda response: "".join(etree.HTML(response.text).xpath("//td/table//tr/td/p//text()")))
+        return self.vicomo.attendance()
