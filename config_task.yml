@@ -10,7 +10,7 @@ sites:
     enabled: true
     cookie: ""
     tasks: [
-      "daily_shotbox",
+      "daily_claim_task",
       "daily_checkin"
     ]
   Cyanbug:
