@@ -1,4 +1,5 @@
 from utils.custom_requests import CustomRequests
+from lxml import etree
 
 
 class NexusPHP:
@@ -18,7 +19,10 @@ class NexusPHP:
     发送群聊区消息
     """
 
-    def send_messagebox(self, message: str, rt_method: callable) -> str:
+    def send_messagebox(self, message: str, rt_method: callable = None) -> str:
+        if rt_method is None:
+            rt_method = lambda response: " ".join(
+                etree.HTML(response.text).xpath("//tr[1]/td//text()"))
         params = {
             "shbox_text": message,
             "shout": "%E6%88%91%E5%96%8A",

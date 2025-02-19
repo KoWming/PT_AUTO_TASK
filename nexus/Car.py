@@ -8,9 +8,7 @@ class Car(NexusPHP):
         super().__init__("https://carpt.net", cookie)
 
     def send_messagebox(self, message: str, callback=None) -> str:
-        return super().send_messagebox(message,
-                                       lambda response: " ".join(
-                                           etree.HTML(response.text).xpath("//tr[1]/td/span/text()")))
+        return super().send_messagebox(message)
 
     def claim_task(self, task_id: str, rt_method=None):
         return super().claim_task(task_id, lambda response: response.json().get("msg", "未知错误"))

@@ -8,9 +8,7 @@ class Cyanbug(NexusPHP):
         super().__init__("https://cyanbug.net", cookie)
 
     def send_messagebox(self, message: str, callback=None) -> str:
-        return super().send_messagebox(message,
-                                       lambda response: " ".join(
-                                           etree.HTML(response.text).xpath("//tr[1]/td/span/text()")))
+        return super().send_messagebox(message)
 
 
 class Tasks:

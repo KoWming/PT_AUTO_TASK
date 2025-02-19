@@ -8,9 +8,7 @@ class Lgs(NexusPHP):
         super().__init__("https://ptlgs.org", cookie)
 
     def send_messagebox(self, message: str, callback=None) -> str:
-        return super().send_messagebox(message,
-                                       lambda response: " ".join(
-                                           etree.HTML(response.text).xpath("//tr[1]/td//text()")))
+        return super().send_messagebox(message)
 
 
 class Tasks:
