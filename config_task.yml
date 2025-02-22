@@ -41,3 +41,10 @@ sites:
       "daily_shotbox",
       "daily_checkin"
     ]
+  LemonHD:
+    enabled: true
+    cookie: ""
+    tasks: [
+      "daily_checkin",
+      "daily_lottery"
+    ]

@@ -22,7 +22,7 @@ class Tasks:
         rsp_text_list = []
         for item in shbox_text_list:
             self.zm.send_messagebox(item)
-            time.sleep(0.5)
+            time.sleep(3)
             message_list = self.zm.get_messagebox()
             if message_list:
                 message = message_list[0]

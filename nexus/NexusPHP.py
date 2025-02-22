@@ -95,3 +95,10 @@ class NexusPHP:
         }
         response = CustomRequests.post(self.messages_url, headers=self.headers, data=data)
         return rt_method(response)
+
+    """
+    抽奖
+    """
+
+    def lottery(self, parameter: tuple = None, rt_method: callable = None):
+        pass
