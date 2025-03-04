@@ -7,7 +7,9 @@ import importlib
 
 
 def load_config(file_path):
-    with open(file_path, 'r', encoding='utf-8') as file:
+    cur_path = os.path.abspath(os.path.dirname(__file__))
+    abs_file_path = os.path.join(cur_path, file_path)
+    with open(abs_file_path, 'r', encoding='utf-8') as file:
         return yaml.safe_load(file)
 
 """
