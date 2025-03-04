@@ -1,3 +1,7 @@
+import os
+import sys
+import io
+import contextlib
 import yaml
 import importlib
 
@@ -6,6 +10,32 @@ def load_config(file_path):
     with open(file_path, 'r', encoding='utf-8') as file:
         return yaml.safe_load(file)
 
+"""
+加载青龙推送服务
+"""
+def load_send():
+    cur_path = os.path.abspath(os.path.dirname(__file__))
+    if os.path.exists(cur_path + "/notify.py"):
+        try:
+            from notify import send
+            return send
+        except ImportError:
+            return False
+    else:
+        return False
+
+class TeeIO(io.TextIOBase):
+    def __init__(self, *streams):
+        self.streams = streams
+
+
+    def write(self, data):
+        for s in self.streams:
+            s.write(data)
+
+    def flush(self):
+        for s in self.streams:
+            s.flush()
 
 def main():
     config = load_config('config_task.yml')
@@ -55,4 +85,11 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    buffer = io.StringIO()
+    with contextlib.redirect_stdout(TeeIO(sys.stdout, buffer)):
+        main()
+    all_logs = buffer.getvalue()
+    notify = load_send()
+    if callable(notify):
+        # 如果推送服务可用
+        notify("PT_AUTO_TASK 日志",all_logs)
