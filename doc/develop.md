@@ -9,9 +9,7 @@
 2. git clone 你fork的项目
 3. 安装以下的开发环境确保你的代码可以正常运行
    - python 3.6+
-   - requests
-   - lxml
-   - pyyaml
+   - requirements.txt中的依赖
 4. 以下以CarPT为例进行代码编写
 ### CarPT
 **首先请观察站点的域名，剔除如PT、BT等关键词，留下一个简单的名字并确保首字母大写，这是本项目的规范**。因此我们将名字定为Car。
@@ -24,8 +22,11 @@ from .NexusPHP import NexusPHP
 class Car(NexusPHP):# 这边是站点的简单名字，即Car，同时与文件名一一对应
 
     def __init__(self, cookie):
-        super().__init__("https://carpt.net", cookie) # 这边是站点的域名，请保证右侧不要有/，以及无关的如/index.php等字符
+        super().__init__(cookie) 
 
+    @staticmethod
+    def get_url():
+        return "https://carpt.net"    # 这边是站点的域名，请保证右侧不要有/，以及无关的如/index.php等字符
 
 
 class Tasks:
@@ -33,10 +34,10 @@ class Tasks:
         self.car = Car(cookie) # 这边请确保与上方的类名一致，实例名称将首字母小写，即car
 
 
-    def daily_checkin(self): # 如果是签到任务，请统一使用该名称
+    def daily_checkin(self): # （可选）如果是签到任务，请统一使用该名称
         return self.car.attendance() # 这边self.{实例名称}，也请和上方确保一致，即car
 
-    def daily_shotbox(self): # 如果站点有每日喊话的奖励，可以添加上本函数
+    def daily_shotbox(self): # （可选）如果站点有每日喊话的奖励，可以添加上本函数
         shbox_text_list = ["car总，求上传", "car总，求下载"] # 这边是要喊话的内容，多条喊话像这样进行间隔
         return "\n".join([self.car.send_messagebox(item) for item in shbox_text_list]) # 这边代码需要确保为self.{实例名称}.send_messagebox，即self.car.send_messagebox,其他不需要改动
 ```
@@ -47,10 +48,9 @@ class Tasks:
   Car: # 这边是站点的简单名字，即Car，与前文对应
     enabled: true # 这边是站点是否启用，true为启用，false为禁用 默认true即可不需要改动
     cookie: "" # 这边是站点的cookie，请保证是空字符串，不要不小心将自己的cookie传上来
-    tasks: [
-      "daily_shotbox",
-      "daily_checkin"
-    ]
+    tasks:
+    - daily_claim_task
+    - daily_checkin
     # tasks中的任务名称请与站点文件中的函数名称一一对应，不要有多余的空格或者其他字符
     # 若站点Task类中写了一个签到任务，那么这里也请务必保证只有一条数据
     # 总而言之，请与前文填写一一对应

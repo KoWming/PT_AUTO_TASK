@@ -3,9 +3,11 @@ from lxml import etree
 
 
 class NexusPHP:
-    def __init__(self, url, cookie: str, url_shoutbox: str = None, url_ajax: str = None, attendance_url: str = None,
+    url = ""
+
+    def __init__(self, cookie: str, url_shoutbox: str = None, url_ajax: str = None, attendance_url: str = None,
                  messages_url: str = None):
-        self.url = url
+        self.url = self.get_url()
         self.url_shoutbox = url_shoutbox or self.url + "/shoutbox.php"
         self.url_ajax = url_ajax or self.url + "/ajax.php"
         self.attendance_url = attendance_url or self.url + "/attendance.php"
@@ -16,6 +18,10 @@ class NexusPHP:
             "referer": self.url,
             "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0"
         }
+
+    @staticmethod
+    def get_url():
+        raise NotImplementedError("Subclasses should implement this method to return the URL.")
 
     """
     发送群聊区消息

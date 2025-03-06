@@ -5,7 +5,11 @@ from lxml import etree
 class Lgs(NexusPHP):
 
     def __init__(self, cookie):
-        super().__init__("https://ptlgs.org", cookie)
+        super().__init__(cookie)
+
+    @staticmethod
+    def get_url():
+        return "https://ptlgs.org"
 
     def send_messagebox(self, message: str, callback=None) -> str:
         return super().send_messagebox(message)

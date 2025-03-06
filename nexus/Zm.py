@@ -7,7 +7,11 @@ from lxml import etree
 class Zm(NexusPHP):
 
     def __init__(self, cookie):
-        super().__init__("https://zmpt.cc", cookie)
+        super().__init__(cookie)
+
+    @staticmethod
+    def get_url():
+        return "https://zmpt.cc"
 
     def send_messagebox(self, message: str, callback=None) -> str:
         return super().send_messagebox(message, lambda response: "")

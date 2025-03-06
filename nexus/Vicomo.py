@@ -9,7 +9,11 @@ import datetime
 class Vicomo(NexusPHP):
 
     def __init__(self, cookie):
-        super().__init__("https://ptvicomo.net", cookie)
+        super().__init__(cookie)
+
+    @staticmethod
+    def get_url():
+        return "https://ptvicomo.net"
 
     def send_messagebox(self, message: str, callback=None) -> str:
         return super().send_messagebox(message,
