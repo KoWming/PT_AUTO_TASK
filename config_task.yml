@@ -1,50 +1,45 @@
+Global:
+  FirstRun: true
 sites:
-  Qingwa:
-    enabled: true
-    cookie: ""
-    tasks: [
-      "daily_shotbox",
-      "daily_checkin"
-    ]
   Car:
+    cookie: ''
     enabled: true
-    cookie: ""
-    tasks: [
-      "daily_claim_task",
-      "daily_checkin"
-    ]
+    tasks:
+    - daily_claim_task
+    - daily_checkin
   Cyanbug:
+    cookie: ''
     enabled: true
-    cookie: ""
-    tasks: [
-      "daily_shotbox",
-      "daily_checkin"
-    ]
-  Vicomo:
-    enabled: true
-    cookie: ""
-    tasks: [
-      "daily_shotbox",
-      "daily_checkin"
-    ]
-  Zm:
-    enabled: true
-    cookie: ""
-    tasks: [
-      "daily_shotbox",
-      "daily_checkin"
-    ]
-  Lgs:
-    enabled: true
-    cookie: ""
-    tasks: [
-      "daily_shotbox",
-      "daily_checkin"
-    ]
+    tasks:
+    - daily_shotbox
+    - daily_checkin
   LemonHD:
+    cookie: ''
     enabled: true
-    cookie: ""
-    tasks: [
-      "daily_checkin",
-      "daily_lottery"
-    ]
+    tasks:
+    - daily_checkin
+    - daily_lottery
+  Lgs:
+    cookie: ''
+    enabled: true
+    tasks:
+    - daily_shotbox
+    - daily_checkin
+  Qingwa:
+    cookie: ''
+    enabled: true
+    tasks:
+    - daily_shotbox
+    - daily_checkin
+  Vicomo:
+    cookie: ''
+    enabled: true
+    tasks:
+    - daily_shotbox
+    - daily_checkin
+  Zm:
+    cookie: ''
+    enabled: true
+    tasks:
+    - daily_shotbox
+    - daily_checkin

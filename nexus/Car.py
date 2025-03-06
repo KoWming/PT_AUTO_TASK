@@ -5,7 +5,11 @@ from lxml import etree
 class Car(NexusPHP):
 
     def __init__(self, cookie):
-        super().__init__("https://carpt.net", cookie)
+        super().__init__(cookie)
+
+    @staticmethod
+    def get_url():
+        return "https://carpt.net"
 
     def send_messagebox(self, message: str, callback=None) -> str:
         return super().send_messagebox(message)

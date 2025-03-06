@@ -5,7 +5,11 @@ from lxml import etree
 class Qingwa(NexusPHP):
 
     def __init__(self, cookie):
-        super().__init__("https://www.qingwapt.com", cookie)
+        super().__init__(cookie)
+
+    @staticmethod
+    def get_url():
+        return "https://www.qingwapt.com"
 
     def send_messagebox(self, message: str, callback=None) -> str:
         # 调用父类函数，并将回调函数设为rsp_data = etree.HTML(response.text).xpath("//ul[1]/li/text()")

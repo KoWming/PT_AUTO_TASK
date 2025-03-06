@@ -6,8 +6,12 @@ from lxml import etree
 class LemonHD(NexusPHP):
 
     def __init__(self, cookie):
-        super().__init__("https://lemonhd.club", cookie)
+        super().__init__(cookie)
         self.lottery_url = self.url + "/lottery.php"
+
+    @staticmethod
+    def get_url():
+        return "https://lemonhd.club"
 
     def lottery(self, parameter: tuple = None, rt_method: callable = None):
         response = CustomRequests.post(self.lottery_url, headers=self.headers, data="type=0")
