@@ -1,0 +1,11 @@
+test/
+.idea/
+__pycache__/
+config_task.yml.bak
+.DS_Store
+.venv/
+.git/
+.github/
+.gitignore
+doc/
+Dockerfile
