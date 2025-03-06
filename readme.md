@@ -4,7 +4,7 @@
 ### 使用方法
 推荐使用青龙脚本定期执行，也可以使用其他方式，如Github Actions、Docker等
 #### 青龙脚本
-待完善
+详见 [使用青龙脚本](doc/usage_qinglong.md)
 #### Github Actions
 待完善
 #### Docker
