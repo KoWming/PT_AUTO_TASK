@@ -44,3 +44,4 @@ sites:
     tasks:
     - daily_shotbox
     - daily_checkin
+    - medal_bonus

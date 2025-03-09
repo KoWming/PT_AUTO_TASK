@@ -113,4 +113,7 @@ class Tasks:
         return self.vicomo.attendance()
 
     def daily_vs_boss(self):
-        return self.vicomo.vs_boss()
+        for i in range(3):
+            self.vicomo.vs_boss()
+            time.sleep(10)  # 休眠10秒
+        return 
