@@ -4,10 +4,12 @@ from .NexusPHP import NexusPHP
 from lxml import etree
 from utils.custom_requests import CustomRequests
 
+
 class Zm(NexusPHP):
 
     def __init__(self, cookie):
         super().__init__(cookie)
+        self.bonus_url = self.url + "/javaapi/user/drawMedalGroupReward?medalGroupId=3"
 
     @staticmethod
     def get_url():
@@ -17,31 +19,11 @@ class Zm(NexusPHP):
         return super().send_messagebox(message, lambda response: "")
 
     def medal_bonus(self):
-        headers = {
-            "accept": "*/*",
-            "accept-language": "zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6",
-            "cache-control": "no-cache",
-            "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
-            "pragma": "no-cache",
-            "priority": "u=1, i",
-            "sec-ch-ua": "\"Not(A:Brand\";v=\"99\", \"Microsoft Edge\";v=\"133\", \"Chromium\";v=\"133\"",
-            "sec-ch-ua-mobile": "?0",
-            "sec-ch-ua-platform": "\"Windows\"",
-            "sec-fetch-dest": "empty",
-            "sec-fetch-mode": "cors",
-            "sec-fetch-site": "same-origin",
-            "cookie": self.cookie,
-            "Referer": "https://zmpt.cc/medal.php",
-            "Referrer-Policy": "strict-origin-when-cross-origin"
-        }
-
-        url = self.url + "/javaapi/user/drawMedalGroupReward?medalGroupId=3"
-
-        response = CustomRequests.get(url, headers=headers)
+        response = CustomRequests.get(self.bonus_url, headers=self.headers)
         response_data = response.json()
 
         ## response_data format like this 
-        #{
+        # {
         #    "serverTime": 1741177064362,
         #    "success": true,
         #    "errorCode": 0,
@@ -50,12 +32,17 @@ class Zm(NexusPHP):
         #        "rewardAmount": 15000,
         #        "seedBonus": "818255.0"
         #    }
-        #}
-        reward = response_data['result']['rewardAmount']
-        seed_bonus = response_data['result']['seedBonus']
+        # }
+        result = response_data.get("result", None)
+        if result is None:
+            print(f"勋章套装奖励领取失败：{response_data.get('errorMsg', None)}")
+        else:
+            reward = result['rewardAmount']
+            seed_bonus = result['seedBonus']
 
-        print(f"梅兰竹菊成套勋章奖励: {reward}")
-        print(f"总电力: {seed_bonus}")  
+            print(f"梅兰竹菊成套勋章奖励: {reward}")
+            print(f"总电力: {seed_bonus}")
+
 
 class Tasks:
     def __init__(self, cookie: str):
